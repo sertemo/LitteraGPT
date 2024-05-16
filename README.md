@@ -42,14 +42,16 @@ El decoder utiliza un mecanismo de  **Multi-head** **self attention** y **masked
 El modelo resultante tiene 19,29 millones de parámetros entrenables.
 
 ### Hiperparámetros
-| Batch        | 64    | Cuantas muestras simultáneas le entran al modelo             |
-| Contexto     | 528   | Número de caracteres de cada ejemplo que le entran el modelo |
-| Iteraciones  | 10000 | Número de iteraciones realizadas en el entreanmiento         |
-| Learning rate| 3e-4  | ratio  de aprendizaje                                        |
-| Embeddings   | 512   | Dimensión del vector de embeddings de cada token             |
-| Heads        | 8     | Número de cabezas del decador                                |
-| Layers       | 6     | Número de capas del Decoder                                  |
-| Dropout      | 0.3   | Dropout utilizado durante el entrenamiento                   |
+| Hiperparámetro | Valor | Descripción                                                  |
+|:---------------|:------|:-------------------------------------------------------------|
+| Batch          | 64    | Cuantas muestras simultáneas le entran al modelo             |
+| Contexto       | 528   | Número de caracteres de cada ejemplo que le entran el modelo |
+| Iteraciones    | 10000 | Número de iteraciones realizadas en el entreanmiento         |
+| Learning rate  | 3e-4  | ratio  de aprendizaje                                        |
+| Embeddings     | 512   | Dimensión del vector de embeddings de cada token             |
+| Heads          | 8     | Número de cabezas del decador                                |
+| Layers         | 6     | Número de capas del Decoder                                  |
+| Dropout        | 0.3   | Dropout utilizado durante el entrenamiento                   |
 
 
 ### Entrenamiento
