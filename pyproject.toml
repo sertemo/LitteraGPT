@@ -10,6 +10,8 @@ packages = [{include = "litteragpt", from = "src"}]
 python = "^3.10"
 toml = "^0.10.2"
 python-dotenv = "^1.0.1"
+streamlit = "^1.34.0"
+torch = "^2.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
