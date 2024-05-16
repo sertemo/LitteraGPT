@@ -12,7 +12,7 @@ El Decoder es capaz de predecir el siguiente token a partir de los tokens anteri
 
 La inferencia se realiza con la plataforma **Streamlit**.
 
-### Características del Decoder
+## Características del Decoder
 ### Dataset
 El Dataset se ha conformado con 5 obras literarias de la literatura española. Las obras son en prosa y son las siguientes:
 - El Quijote
@@ -21,11 +21,11 @@ El Dataset se ha conformado con 5 obras literarias de la literatura española. L
 - Arbol de la ciencia
 - La Regenta
 
-Las obras han sido descargada de la página de [Project Gutenberg](https://www.gutenberg.org/browse/languages/es)
+Las obras han sido descargadas de la página de [Project Gutenberg](https://www.gutenberg.org/browse/languages/es)
 
 Se han encadenado los textos y quitado los dobles espacios y dobles guiones. Posteriormente se ha dividio el conjunto del texto por frases. Se han creado **chunks** de 20 frases, creando 2001 párrafos para después hacer un **shuffle** de todos los párrafos.
 
-El dataset es un string con **3.568.528** caracteres. y vocabulario de **115** caracteres
+El dataset es un string con **3.568.528** de caracteres. y vocabulario de **115** caracteres
 
 ### Tokenizer
 **Caracter level** tokenizer

@@ -2,7 +2,7 @@
 name = "litteragpt"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Sergio Tejedor <tejedor.moreno@gmail.com>"]
 readme = "README.md"
 packages = [{include = "litteragpt", from = "src"}]
 
@@ -11,7 +11,7 @@ python = "^3.10"
 toml = "^0.10.2"
 python-dotenv = "^1.0.1"
 streamlit = "^1.34.0"
-torch = "^2.3.0"
+torch = "2.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
