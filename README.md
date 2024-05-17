@@ -74,7 +74,7 @@ Se obtiene una **loss** de entrenamiento de **0.9762** y una **loss** de validac
 ## Tecnologías
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Poetry](https://img.shields.io/badge/Poetry-60A5FA?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/-Streamlit-black?style=flat-square&logo=streamlit)
+![Streamlit](https://img.shields.io/badge/-Streamlit-black?style=for-the-badge&logo=streamlit)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
 
 ## Contribuyentes
