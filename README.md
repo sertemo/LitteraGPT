@@ -2,6 +2,7 @@
 ### v0.1.0
 
 ![Tests](https://github.com/sertemo/LitteraGPT/actions/workflows/tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/sertemo/LitteraGPT/graph/badge.svg?token=6N7LBN76A2)](https://codecov.io/gh/sertemo/LitteraGPT)
 ![Dependabot](https://img.shields.io/badge/dependabot-enabled-blue.svg?logo=dependabot)
 ![GitHub](https://img.shields.io/github/license/sertemo/LitteraGPT)
 

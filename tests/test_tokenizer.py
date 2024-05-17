@@ -14,8 +14,6 @@
 
 import random
 
-import litteragpt
-
 from litteragpt.transformer.tokenizer import Tokenizer
 
 def test_tokenizer_load_correct(tokenizer: Tokenizer):

@@ -1,6 +1,16 @@
 import streamlit as st
+import torch
 
+from litteragpt.transformer.decoder import BigramLanguageModel
 from litteragpt.transformer.tokenizer import tokenizer
+from litteragpt.settings import MODEL_PATH
+
+
+@st.cache_resource()
+def load_model() -> BigramLanguageModel:
+    model = BigramLanguageModel()
+    model.load_state_dict(torch.load(MODEL_PATH))
+    return model
 
 
 def main():
