@@ -14,7 +14,10 @@
 
 import pytest
 
+from litteragpt.transformer.tokenizer import Tokenizer
+
 
 @pytest.fixture(scope="session")
-def mi_fixture():
-    raise NotImplementedError()
+def tokenizer():
+    tokenizer = Tokenizer()
+    return tokenizer

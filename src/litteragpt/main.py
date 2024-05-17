@@ -1,6 +1,6 @@
 import streamlit as st
 
-from litteragpt.ml.tokenizer import Tokenizer
+from litteragpt.transformer.tokenizer import tokenizer
 
 
 def main():
@@ -16,8 +16,6 @@ def main():
     st.subheader(
         "GPT que infiere un texto con el estilo de varias obras de la literatura española."
     )
-
-    tokenizer = Tokenizer()
 
     st.slider("Número de frases a inferir", min_value=1, max_value=5)
     input = st.text_input(

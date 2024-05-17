@@ -25,7 +25,7 @@ Las obras han sido descargadas de la página de [Project Gutenberg](https://www.
 
 Se han encadenado los textos y quitado los dobles espacios y dobles guiones. Posteriormente se ha dividio el conjunto del texto por frases. Se han creado **chunks** de 20 frases, creando 2001 párrafos para después hacer un **shuffle** de todos los párrafos.
 
-El dataset es un string con **3.568.528** de caracteres. y vocabulario de **115** caracteres
+El dataset es un string con **3.568.528** caracteres y un vocabulario de **115** caracteres.
 
 ### Tokenizer
 **Caracter level** tokenizer
