@@ -1,9 +1,11 @@
+import streamlit as st
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
 from litteragpt.transformer import config as c
 from litteragpt.transformer.tokenizer import tokenizer
+from litteragpt.settings import MODEL_PATH
 
 
 class Head(nn.Module):
@@ -118,7 +120,7 @@ class BigramLanguageModel(nn.Module):
         return logits, loss
 
     def generate(
-        self, idx: torch.Tensor, max_new_tokens: int, one_sentence: bool = False
+        self, idx: torch.Tensor, max_new_tokens: int, one_sentence: bool = True,
     ) -> torch.Tensor:
         for _ in range(max_new_tokens):
             # crop idx to the last block_size tokens
@@ -142,3 +144,35 @@ class BigramLanguageModel(nn.Module):
                     break
 
         return idx
+
+
+@st.cache_resource()
+def load_model() -> BigramLanguageModel:
+    model = torch.load(MODEL_PATH, map_location=torch.device('cpu'))
+    return model
+
+@st.cache_data(show_spinner="Generando...")
+def generar_cadena(
+        input: str,
+        num_sentences: int=1
+        ) -> str:
+    # Cargamos el modelo
+    model = load_model()
+
+    # Codificamos
+    indices = tokenizer.encode(input)
+    # Transformmos en tensor
+    x = torch.tensor(indices).reshape((1, len(input)))
+    print(x)
+    print(x.shape)
+    for _ in range(num_sentences):
+        model.eval()
+        with torch.no_grad():
+            for i in range(x.shape[0]):
+                output = model.generate(idx=x, max_new_tokens=1000)[i].tolist()
+            x = torch.tensor(output).unsqueeze(0)
+            print(x)
+            print(x.shape)
+
+    texto = tokenizer.decode(x.tolist())
+    return texto

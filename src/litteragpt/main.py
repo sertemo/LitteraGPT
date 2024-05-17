@@ -1,16 +1,19 @@
+import time
+
 import streamlit as st
-import torch
 
-from litteragpt.transformer.decoder import BigramLanguageModel
-from litteragpt.transformer.tokenizer import tokenizer
-from litteragpt.settings import MODEL_PATH
+from litteragpt.transformer.decoder import generar_cadena
+from litteragpt.transformer.decoder import BigramLanguageModel, Block, MultiHeadAttention, Head, FeedForward
 
-
-@st.cache_resource()
-def load_model() -> BigramLanguageModel:
-    model = BigramLanguageModel()
-    model.load_state_dict(torch.load(MODEL_PATH))
-    return model
+def stream(cadena: str) -> None:
+    """Streamea la cadena"""
+    stream_container = st.empty()
+    with stream_container:
+        output = ""
+        for letter in cadena:
+            output += letter
+            st.subheader(output)
+            time.sleep(0.05)
 
 
 def main():
@@ -23,19 +26,18 @@ def main():
     )
 
     st.title("LitteraGPT")
-    st.subheader(
+    st.header(
         "GPT que infiere un texto con el estilo de varias obras de la literatura española."
     )
 
-    st.slider("Número de frases a inferir", min_value=1, max_value=5)
+    num_frases: int = st.slider("Número de frases a inferir", min_value=1, max_value=5)
     input = st.text_input(
         "Escribe una palabra o frase y pulsa **Intro** para que el modelo continúe."
     )
 
-    # TODO Hacer que streamee los caracteres.
     if input:
-        tokens = tokenizer.encode(input)
-        st.write(tokens)
+        cadena = generar_cadena(input, num_sentences=num_frases)
+        stream(cadena)
 
 
 if __name__ == "__main__":
