@@ -13,11 +13,23 @@
 # limitations under the License.
 
 import pytest
+import torch
 
 from litteragpt.transformer.tokenizer import Tokenizer
+from litteragpt.transformer.decoder import BigramLanguageModel
+from litteragpt.transformer import config as c
 
 
 @pytest.fixture(scope="session")
 def tokenizer():
     tokenizer = Tokenizer()
     return tokenizer
+
+@pytest.fixture
+def dummy_input():
+    return torch.randint(0, 100, (1, c.block_size, c.n_embd)).float()
+
+
+@pytest.fixture
+def bigram_model():
+    return BigramLanguageModel()
