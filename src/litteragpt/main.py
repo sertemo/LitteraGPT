@@ -1,5 +1,3 @@
-import time
-
 import streamlit as st
 
 from litteragpt.transformer.decoder import generar_cadena
@@ -10,17 +8,10 @@ from litteragpt.transformer.model import (
     Head,
     FeedForward,
 )
+from litteragpt.settings import N_FRASES_DEFAULT
+from litteragpt.styles import CSS_STYLES, Fonts, Sizes
+from litteragpt.utils import stream, imagen_con_enlace, añadir_salto, mostrar_enlace, texto
 
-
-def stream(cadena: str) -> None:
-    """Streamea la cadena"""
-    stream_container = st.empty()
-    with stream_container:
-        output = ""
-        for letter in cadena:
-            output += letter
-            st.write(output)
-            time.sleep(0.05)
 
 
 def main():
@@ -32,31 +23,52 @@ def main():
         initial_sidebar_state="auto",
     )
 
-    st.title("LitteraGPT")
-    st.header(
-        "GPT que genera un texto con el estilo de varias obras de la literatura española."
+    st.markdown(CSS_STYLES, unsafe_allow_html=True
+)
+
+    texto("LitteraGPT", font_family=Fonts.poppins, centrar=True, font_size=60, formato='b', color='#4E4F50')
+    texto(
+        "GPT que genera un texto con el estilo de varias obras de la literatura española.",
+        font_family="Poppins",
+        centrar=True,
+        color='#746C70'
     )
 
-    num_frases: int = st.slider("Número de frases a generar", min_value=1, max_value=3)
+    mostrar_enlace(
+        "Ver detalles del modelo",
+        "https://github.com/sertemo/LitteraGPT?tab=readme-ov-file#caracter%C3%ADsticas-del-decoder",
+        color="#647C90",
+        centrar=True,
+    )
+
+    añadir_salto()
+
     input = st.text_input(
-        "Escribe una palabra o frase y pulsa **Intro** para que el modelo continúe."
+        "Escribe una palabra o frase.",
+        help="Escribe una palabra o frase.",
+        label_visibility="hidden"
     )
 
-    if input:
-        # Comprobamos que el input o el numero de frases no sean el mismo
-        if input != st.session_state.get("input") or num_frases != st.session_state.get(
-            "num_frases"
-        ):
-            cadena = generar_cadena(input, num_sentences=num_frases)
-            stream(cadena)
-            st.session_state["input"] = input
-            st.session_state["response"] = cadena
-            st.session_state["num_frases"] = num_frases
-        else:
-            # Si son el mismo es que se ha recargado la página con los mismos datos
-            st.write(st.session_state.get("response"))
+    button_clicked = st.markdown('<div class="button-container"><button class="custom-button" \
+                onclick="streamlit.sendCustomMessage(\'generate-text\', {})">Generar Texto</button></div>',
+                unsafe_allow_html=True)
+    
+    añadir_salto()
 
-    st.session_state
+    if button_clicked and input and (input != st.session_state.get("input")):
+        cadena = generar_cadena(input, num_sentences=N_FRASES_DEFAULT)
+        stream(cadena)
+        st.session_state["input"] = input
+        st.session_state["response"] = cadena
+    else:
+        # Si son el mismo es que se ha recargado la página con los mismos datos
+        texto_formateado = f"""
+        <div class="output-text" style='font-size: {Sizes.stream_text_size}; \
+            color: #4E4F50; font-family: {Fonts.poppins};'>
+            {st.session_state.get("response")}
+        </div>
+        """
+        st.markdown(texto_formateado, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":

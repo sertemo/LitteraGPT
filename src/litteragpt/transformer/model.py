@@ -1,9 +1,16 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+from torchtyping import TensorType  # type: ignore
 
 from litteragpt.transformer import config as c
 from litteragpt.transformer.tokenizer import tokenizer
+
+# Para que flake8 no se queje
+B = None  # Batch
+T = None  # Context lenght (block size)
+C = None  # Embedding dimension
+H = None  # C / n_heads
 
 
 class Head(nn.Module):
@@ -17,17 +24,17 @@ class Head(nn.Module):
         self.register_buffer("tril", torch.tril(torch.ones(c.block_size, c.block_size)))
         self.dropout: nn.Dropout = nn.Dropout(c.dropout)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: TensorType["B", "T", "C"]) -> TensorType["B", "T", "C"]:
         B, T, C = x.shape
-        k = self.key(x)
-        q = self.query(x)
+        k: TensorType["B", "T", "H"] = self.key(x)
+        q: TensorType["B", "T", "H"] = self.query(x)
         # Computes self-attention scores affinities
         wei = q @ k.transpose(-2, -1) * C**-0.5
         wei = wei.masked_fill(self.tril[:T, :T] == 0, float("-inf"))
         wei = F.softmax(wei, dim=-1)
         wei = self.dropout(wei)
-        v = self.value(x)
-        out: torch.Tensor = wei @ v
+        v: TensorType["B", "T", "C"] = self.value(x)
+        out: TensorType["B", "T", "C"] = wei @ v
         return out
 
 
@@ -40,7 +47,7 @@ class MultiHeadAttention(nn.Module):
         self.proj: nn.Linear = nn.Linear(c.n_embd, c.n_embd)
         self.dropout: nn.Dropout = nn.Dropout(c.dropout)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: TensorType["B", "T", "C"]) -> TensorType["B", "T", "C"]:
         out = torch.cat([head(x) for head in self.heads], dim=-1)
         out = self.dropout(self.proj(out))
         return out
@@ -97,11 +104,11 @@ class BigramLanguageModel(nn.Module):
         self.lm_head: nn.Linear = nn.Linear(c.n_embd, tokenizer.vocab_size)
 
     def forward(
-        self, idx: torch.Tensor, targets: torch.Tensor | None = None
+        self, idx: TensorType["B", "T"], targets: TensorType["B", "T"] | None = None
     ) -> tuple[torch.Tensor, torch.Tensor | None]:
         B, T = idx.shape
 
-        tok_emb = self.token_embedding_table(idx)
+        tok_emb: TensorType["B", "T", "C"] = self.token_embedding_table(idx)
         pos_emb = self.position_embedding_table(torch.arange(T, device=c.device))
         x = tok_emb + pos_emb
         x = self.blocks(x)

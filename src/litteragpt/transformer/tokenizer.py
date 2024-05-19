@@ -1,8 +1,5 @@
 import json
 from pathlib import Path
-from typing import Any
-
-from icecream import ic
 
 from litteragpt.settings import RUTA_TOKEN_MAP
 
@@ -24,7 +21,7 @@ class Tokenizer:
         """
         ruta_token_map = self.token_map_path
         with open(ruta_token_map, "r") as f:
-            token_map: dict[str, Any] = json.load(f)
+            token_map: dict[str, int] = json.load(f)
         return token_map
 
     def _reverse_dict(self, dict_to_reverse: dict[str, int]) -> dict[int, str]:
