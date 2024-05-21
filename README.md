@@ -65,6 +65,9 @@ Se obtiene una **loss** de entrenamiento de **0.9762** y una **loss** de validac
 
 
 ## Uso
+Escribe una palabra o una frase en la caja de texto y presiona sobre el botón **Generar**. El modelo generará dos frases tomando como contexto la palabra o la frase indicada.
+
+![alt text](<assets/img/uso litteragpt.JPG>)
 
 ## Tests
 ![Pytest](https://img.shields.io/badge/testing-pytest-blue.svg)

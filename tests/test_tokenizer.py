@@ -31,7 +31,7 @@ def test_vocab_size_correct(tokenizer: Tokenizer):
     assert isinstance(tokenizer.vocab_size, int), "El vocab size no se correcto"
 
 def test_decode_correct(tokenizer: Tokenizer):
-    tokens = [random.randint(0, tokenizer.vocab_size) for _ in range(10)]
+    tokens = [random.randint(0, tokenizer.vocab_size-1) for _ in range(10)]
     texto = tokenizer.decode(tokens)
     print(texto)
     assert isinstance(texto, str), "El texto no es un string"

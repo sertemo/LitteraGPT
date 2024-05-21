@@ -1,16 +1,19 @@
+DEFAULT_COLOR = "#4E4F50"
 
-DEFAULT_COLOR = '#4E4F50'
 
 class Fonts:
     poppins = "Poppins"
+
 
 class Colors:
     primary = ""
     secondary = ""
     enphasis = ""
 
+
 class Sizes:
     stream_text_size = "16px"
+
 
 CSS_STYLES = """
     <style>
@@ -58,7 +61,7 @@ CSS_STYLES = """
         transition: background-color 0.3s ease;
     }
     .custom-button:hover {
-        background-color: #E2DED0;
+        background-color: #ffd966;
     }
     .button-container {
         text-align: center;

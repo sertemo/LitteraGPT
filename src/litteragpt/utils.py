@@ -7,7 +7,6 @@ import streamlit as st
 from litteragpt.styles import DEFAULT_COLOR, Fonts, Sizes
 
 
-
 def stream(cadena: str) -> None:
     """Streamea la cadena"""
     stream_container = st.empty()
@@ -15,7 +14,8 @@ def stream(cadena: str) -> None:
     for letter in cadena:
         output += letter
         texto_formateado = f"""
-        <div class="output-text" style='font-size: {Sizes.stream_text_size}; color: #4E4F50; font-family: {Fonts.poppins};'>
+        <div class="output-text" style='font-size: {Sizes.stream_text_size};\
+            color: #4E4F50; font-family: {Fonts.poppins};'>
             {output}
         </div>
         """
@@ -24,14 +24,16 @@ def stream(cadena: str) -> None:
 
 
 def texto(
-        texto:str, /, *,
-        font_size: int=30,
-        color: str=DEFAULT_COLOR,
-        font_family: str="Helvetica",
-        formato: str="",
-        centrar: bool=False
-        ) -> None:
-    """ Función para personalizar el texto con HTML"""
+    texto: str,
+    /,
+    *,
+    font_size: int = 30,
+    color: str = DEFAULT_COLOR,
+    font_family: str = "Helvetica",
+    formato: str = "",
+    centrar: bool = False,
+) -> None:
+    """Función para personalizar el texto con HTML"""
     if formato:
         texto = f"<{formato}>{texto}</{formato}>"
     if centrar:
@@ -92,7 +94,8 @@ def imagen_con_enlace(
     centrar (bool): Si es verdadero, centra la imagen.
     radio_borde (int): Radio del borde redondeado en píxeles.
     """
-    html = f'<a href="{url_enlace}" target="_blank"><img src="{url_imagen}" alt="{alt_text}" style="max-width:{max_width}%; height:auto; border-radius:{radio_borde}px;"></a>'
+    html = f'<a href="{url_enlace}" target="_blank"><img src="{url_imagen}" \
+        alt="{alt_text}" style="max-width:{max_width}%; height:auto; border-radius:{radio_borde}px;"></a>'
     if centrar:
         html = f"""
                     <div style='text-align: center'>

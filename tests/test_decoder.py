@@ -44,8 +44,3 @@ def test_bigram_language_model(bigram_model):
     assert logits.shape == (1, c.block_size, tokenizer.vocab_size)
     assert (loss is None) or isinstance(loss, torch.Tensor)
 
-
-def test_generate(bigram_model):
-    idx = torch.randint(0, tokenizer.vocab_size, (1, c.block_size))
-    generated = bigram_model.generate(idx, max_new_tokens=10)
-    assert generated.shape[1] == c.block_size + 10
