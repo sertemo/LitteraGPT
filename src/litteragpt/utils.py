@@ -23,6 +23,14 @@ def stream(cadena: str) -> None:
         time.sleep(0.05)
 
 
+def html_button_generate() -> st.markdown:
+    return st.markdown(
+        '<div class="button-container"><button class="custom-button" \
+                onclick="streamlit.sendCustomMessage(\'generate-text\', {})">Generar Texto</button></div>',
+        unsafe_allow_html=True,
+    )
+
+
 def texto(
     texto: str,
     /,

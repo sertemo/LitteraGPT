@@ -52,7 +52,7 @@ def main():
         centrar=True,
     )
 
-    añadir_salto()
+    añadir_salto(2)
 
     input = st.text_input(
         "Escribe una palabra o frase.",
@@ -60,11 +60,11 @@ def main():
         label_visibility="hidden",
     )
 
-    button_clicked = st.markdown(
-        '<div class="button-container"><button class="custom-button" \
-                onclick="streamlit.sendCustomMessage(\'generate-text\', {})">Generar Texto</button></div>',
-        unsafe_allow_html=True,
-    )
+    añadir_salto()
+
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        button_clicked = st.button("Generar Texto", use_container_width=True)
 
     añadir_salto()
 

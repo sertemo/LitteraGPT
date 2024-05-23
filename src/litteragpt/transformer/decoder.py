@@ -1,3 +1,4 @@
+from stqdm import stqdm
 import streamlit as st
 import torch
 

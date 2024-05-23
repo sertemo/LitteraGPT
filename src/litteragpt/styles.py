@@ -15,6 +15,9 @@ class Sizes:
     stream_text_size = "16px"
 
 
+
+
+
 CSS_STYLES = """
     <style>
     .main-title {
