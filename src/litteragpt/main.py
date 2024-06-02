@@ -39,7 +39,7 @@ def main():
         color="#4E4F50",
     )
     texto(
-        "GPT que genera un texto con el estilo de varias obras de la literatura española.",
+        "GPT con el estilo de varias obras de la literatura española.",
         font_family="Poppins",
         centrar=True,
         color="#746C70",

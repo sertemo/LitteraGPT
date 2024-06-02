@@ -13,8 +13,6 @@ toml = "^0.10.2"
 python-dotenv = "^1.0.1"
 streamlit = "^1.34.0"
 torch = "2.2.1"
-streamlit-lottie = "^0.0.5"
-stqdm = "^0.0.5"
 
 
 [tool.poetry.group.dev.dependencies]
